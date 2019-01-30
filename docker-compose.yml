@@ -1,0 +1,17 @@
+version: '3.3'
+services:
+  data-processing:
+    build:
+      context: '.'
+    ports:
+      - '8080:8080/tcp'
+  database:
+    image: 'postgres:9.6'
+    environment:
+      - 'POSTGRES_DB=project'
+      - 'POSTGRES_USER=project'
+      - 'POSTGRES_PASSWORD=abc123'
+    volumes:
+      - './database:/docker-entrypoint-initdb.d'
+    ports:
+      - '5432:5432/tcp'
